@@ -58,7 +58,7 @@ def main():
 			print(1)
 			img_resized=cv2.resize(crop,(350,350))
 			print(2)
-			img_resized=img_resized.astype(np.float32)/255.
+			img_resized=img_resized.astype(np.float32)/255.0
 			print(3)
 			img_result=[img_resized]
 			print(4)
