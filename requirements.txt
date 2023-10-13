@@ -3,5 +3,4 @@ opencv-python
 keras
 numpy
 pillow
-copy
 mediapipe
