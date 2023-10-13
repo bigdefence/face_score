@@ -5,12 +5,16 @@ from PIL import Image,ImageDraw
 from keras.models import load_model
 import mediapipe as mp
 import time
-ad_code = """
+kakao_ad_code = """
     <ins class="kakao_ad_area" style="display:none;"
 data-ad-unit = "DAN-D3RRybNMwWS0cvrm"
 data-ad-width = "250"
 data-ad-height = "250"></ins>
 <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
+"""
+google_ad_code="""
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2059330853437709"
+     crossorigin="anonymous"></script>
 """
 model=load_model('face.h5')
 mp_drawing = mp.solutions.drawing_utils
@@ -95,6 +99,7 @@ def main():
 				st.write("5점 외모, '외모의 신'입니다. 외모계에서 당신을 따라잡으려면 영웅이 필요할 겁니다! 🦸‍♂️🦸‍♀️\n당신은 외모계의 '뷰티 신'입니다! 🌟 모든 사람들이 당신을 따르고 싶어할 겁니다!")
 		except:
 			st.subheader('얼굴을 감지하지 못했습니다! 얼굴 정면 사진을 다시 입력해주세요!')
-	st.components.v1.html(ad_code, height=250, scrolling=True)
+	st.components.v1.html(kakao_ad_code, height=250, scrolling=False)
+	st.components.v1.html(google_ad_code, height=250, scrolling=False)
 if __name__ == "__main__":
     main()
