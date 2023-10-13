@@ -2,10 +2,9 @@ import streamlit as st
 import cv2
 import numpy as np
 from PIL import Image,ImageDraw
-# from keras.models import load_model
-import tensorflow.keras
+from keras.models import load_model
 import mediapipe as mp
-model=tensorflow.keras.models.load_model('face.h5')
+model=load_model('face.h5')
 mp_drawing = mp.solutions.drawing_utils
 mp_face_mesh = mp.solutions.face_mesh
 mp_drawing_styles = mp.solutions.drawing_styles
