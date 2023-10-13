@@ -104,6 +104,5 @@ def main():
 		except:
 			st.subheader('얼굴을 감지하지 못했습니다! 얼굴 정면 사진을 다시 입력해주세요!')
 	st.components.v1.html(kakao_ad_code, height=250, scrolling=False)
-	st.components.v1.html(google_ad_code, height=250, scrolling=False)
 if __name__ == "__main__":
     main()
