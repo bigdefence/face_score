@@ -12,9 +12,12 @@ data-ad-width = "250"
 data-ad-height = "250"></ins>
 <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
 """
-google_ad_code="""
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2059330853437709"
-     crossorigin="anonymous"></script>
+kakao1_ad_code="""
+<ins class="kakao_ad_area" style="display:none;"
+data-ad-unit = "DAN-1ksOUsBr2pME8aR1"
+data-ad-width = "728"
+data-ad-height = "90"></ins>
+<script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
 """
 model=load_model('face.h5')
 mp_drawing = mp.solutions.drawing_utils
@@ -23,6 +26,7 @@ mp_drawing_styles = mp.solutions.drawing_styles
 mp_face_detection = mp.solutions.face_detection
 drawing_spec = mp_drawing.DrawingSpec(thickness=1, circle_radius=1,color=(0,255,0))
 def main():
+	st.components.v1.html(kakao1_ad_code, height=250, scrolling=False)
 	st.title('나의 외모점수는?')
     
     # 파일 업로드 섹션 디자인
