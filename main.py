@@ -55,7 +55,7 @@ def main():
 			h=int(detection_bbox[0].height*image.height)+40
 			crop=img_np[y:y+h,x:x+w]
 			st.image(annotated_image, caption="업로드한 이미지", use_column_width=True)
-			img_resized=cv2.resize(crop,(350,350))
+			img_resized=crop
 			img_resized=img_resized.astype(np.float32)/255.
 			img_result=[img_resized]
 			img_result=np.array(img_result,dtype=np.float32)
