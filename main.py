@@ -3,10 +3,7 @@ import cv2
 import numpy as np
 from PIL import Image,ImageDraw
 from keras.models import load_model
-import time
-import copy
 import mediapipe as mp
-import base64
 model=load_model('face.h5')
 mp_drawing = mp.solutions.drawing_utils
 mp_face_mesh = mp.solutions.face_mesh
@@ -43,10 +40,6 @@ def main():
 			    img = annotated_image
 			        # 작업 전에 BGR 이미지를 RGB로 변환합니다.
 			    results = face_mesh.process(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
-
-			    # 이미지에 출력하고 그 위에 얼굴 그물망 경계점을 그립니다.
-			    # if not results.multi_face_landmarks:
-			    #     continue
 			    annotated_image = img.copy()
 			    for face_landmarks in results.multi_face_landmarks:
 			        mp_drawing.draw_landmarks(
