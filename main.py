@@ -95,6 +95,6 @@ def main():
 				st.write("5점 외모, '외모의 신'입니다. 외모계에서 당신을 따라잡으려면 영웅이 필요할 겁니다! 🦸‍♂️🦸‍♀️\n당신은 외모계의 '뷰티 신'입니다! 🌟 모든 사람들이 당신을 따르고 싶어할 겁니다!")
 		except:
 			st.subheader('얼굴을 감지하지 못했습니다! 얼굴 정면 사진을 다시 입력해주세요!')
-	st.markdown(ad_code, unsafe_allow_html=True)
+	st.components.v1.html(ad_code, height=250, scrolling=True)
 if __name__ == "__main__":
     main()
