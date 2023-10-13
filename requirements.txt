@@ -1,4 +1,5 @@
 opencv-python-headless
+protobuf<3.20,>=3.9.2
 keras
 numpy
 pillow
