@@ -6,10 +6,10 @@ from keras.models import load_model
 import mediapipe as mp
 import time
 kakao_ad_code = """
-    <ins class="kakao_ad_area" style="display:none;"
+ <ins class="kakao_ad_area" style="display:none;"
 data-ad-unit = "DAN-D3RRybNMwWS0cvrm"
-data-ad-width = "250"
-data-ad-height = "250"></ins>
+data-ad-width = "320"
+data-ad-height = "100"></ins>
 <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
 """
 kakao1_ad_code="""
