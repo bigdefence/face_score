@@ -4,7 +4,7 @@ import numpy as np
 from PIL import Image,ImageDraw
 from keras.models import load_model
 import mediapipe as mp
-model=load_model('face.h5')
+# model=load_model('face.h5')
 mp_drawing = mp.solutions.drawing_utils
 mp_face_mesh = mp.solutions.face_mesh
 mp_drawing_styles = mp.solutions.drawing_styles
@@ -59,6 +59,7 @@ def main():
 			img_resized=img_resized.astype(np.float32)/255.0
 			img_result=[img_resized]
 			img_result=np.array(img_result,dtype=np.float32)
+			model=load_model('face.h5')
 			preds=model.predict(img_result)
 			print('예측!')
 	        # AI 외모 분석 진행
