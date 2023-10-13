@@ -15,8 +15,8 @@ data-ad-height = "250"></ins>
 kakao1_ad_code="""
 <ins class="kakao_ad_area" style="display:none;"
 data-ad-unit = "DAN-1ksOUsBr2pME8aR1"
-data-ad-width = "728"
-data-ad-height = "90"></ins>
+data-ad-width = "320"
+data-ad-height = "100"></ins>
 <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
 """
 model=load_model('face.h5')
