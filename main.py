@@ -59,9 +59,13 @@ def main():
 			img_resized=cv2.resize(crop,(350,350))
 			print(2)
 			img_resized=img_resized.astype(np.float32)/255.
+			print(3)
 			img_result=[img_resized]
+			print(4)
 			img_result=np.array(img_result,dtype=np.float32)
+			print(5)
 			preds=model.predict(img_result)
+			print(6)
 	        # AI 외모 분석 진행
 			with st.spinner('AI가 당신의 외모를 분석중입니다...'):
 				time.sleep(3)  # 예시로 3초 동안 로딩 중 표시 (실제 분석으로 대체 필요)
