@@ -19,6 +19,10 @@ data-ad-width = "320"
 data-ad-height = "100"></ins>
 <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
 """
+coupang_ad_code="""
+<iframe src="https://ads-partners.coupang.com/widgets.html?id=718831&template=carousel&trackingCode=AF3660738&subId=&width=680&height=140&tsource=" width="680" height="140" frameborder="0" scrolling="no" referrerpolicy="unsafe-url"></iframe>
+<style>margin: 0 auto;</style>
+"""
 model=load_model('face.h5')
 mp_drawing = mp.solutions.drawing_utils
 mp_face_mesh = mp.solutions.face_mesh
@@ -26,7 +30,8 @@ mp_drawing_styles = mp.solutions.drawing_styles
 mp_face_detection = mp.solutions.face_detection
 drawing_spec = mp_drawing.DrawingSpec(thickness=1, circle_radius=1,color=(0,255,0))
 def main():
-	st.components.v1.html(kakao1_ad_code, height=250, scrolling=False)
+	
+	st.components.v1.html(kakao1_ad_code, height=100, scrolling=False)
 	st.title('나의 외모점수는?')
     
     # 파일 업로드 섹션 디자인
@@ -103,6 +108,7 @@ def main():
 				st.write("5점 외모, '외모의 신'입니다. 외모계에서 당신을 따라잡으려면 영웅이 필요할 겁니다! 🦸‍♂️🦸‍♀️\n당신은 외모계의 '뷰티 신'입니다! 🌟 모든 사람들이 당신을 따르고 싶어할 겁니다!")
 		except:
 			st.subheader('얼굴을 감지하지 못했습니다! 얼굴 정면 사진을 다시 입력해주세요!')
-	st.components.v1.html(kakao_ad_code, height=250, scrolling=False)
+	st.components.v1.html(kakao_ad_code, height=100, scrolling=False)
+	st.components.v1.html(coupang_ad_code, height=140, scrolling=False)
 if __name__ == "__main__":
     main()
