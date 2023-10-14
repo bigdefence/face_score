@@ -36,6 +36,7 @@ def main():
     
     # 파일 업로드 섹션 디자인
 	st.subheader('인공지능이 당신의 매력을 분석해줄거에요!')
+	st.subheader('얼굴 정면 사진 업로드 해주세요!')
     # 파일 업로드 컴포넌트
 	uploaded_file = st.file_uploader("PNG 또는 JPG 이미지를 업로드하세요.", type=["png", "jpg", "jpeg"])
 	if uploaded_file is not None:
