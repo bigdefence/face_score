@@ -8,8 +8,8 @@ import time
 kakao_ad_code = """
  <ins class="kakao_ad_area" style="display:none;"
 data-ad-unit = "DAN-FoAWM60Vqs0G2uuF"
-data-ad-width = "320"
-data-ad-height = "100"></ins>
+data-ad-width = "250"
+data-ad-height = "250"></ins>
 <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
 """
 
