@@ -111,6 +111,7 @@ def main():
 	        justify-content: center;
 	        align-items: center;
 	        height: 100vh;
+	 	margin: 0 auto;
 	    }
 	    </style>
 	"""
