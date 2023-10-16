@@ -104,22 +104,7 @@ def main():
 			st.subheader('얼굴을 감지하지 못했습니다! 얼굴 정면 사진을 다시 입력해주세요!')
 	
 	# st.components.v1.html(kakao_ad_code, scrolling=False)
-	centered_style = """
-	    <style>
-	    .centered {
-	        display: flex;
-	        justify-content: center;
-	        align-items: center;
-	        height: 100vh;
-	 	margin: 0 auto;
-	    }
-	    </style>
-	"""
-
-	# HTML 코드 및 스타일 적용
-	st.markdown(centered_style, unsafe_allow_html=True)
-	# HTML 코드를 가운데로 정렬하여 표시
-	st.markdown(f'<div class="centered">{kakao_ad_code}</div>', unsafe_allow_html=True)
+	st.markdown(f'<center>{kakao_ad_code}</center>', unsafe_allow_html=True)
 	st.components.v1.html(coupang_ad_code, height=140, scrolling=False)
 if __name__ == "__main__":
     main()
