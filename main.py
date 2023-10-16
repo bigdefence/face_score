@@ -7,18 +7,12 @@ import mediapipe as mp
 import time
 kakao_ad_code = """
  <ins class="kakao_ad_area" style="display:none;"
-data-ad-unit = "DAN-D3RRybNMwWS0cvrm"
-data-ad-width = "320"
-data-ad-height = "100"></ins>
+data-ad-unit = "DAN-FoAWM60Vqs0G2uuF"
+data-ad-width = "728"
+data-ad-height = "90"></ins>
 <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
 """
-kakao1_ad_code="""
-<ins class="kakao_ad_area" style="display:none;"
-data-ad-unit = "DAN-1ksOUsBr2pME8aR1"
-data-ad-width = "320"
-data-ad-height = "100"></ins>
-<script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
-"""
+
 coupang_ad_code="""
 <iframe src="https://ads-partners.coupang.com/widgets.html?id=718831&template=carousel&trackingCode=AF3660738&subId=&width=680&height=140&tsource=" width="680" height="140" frameborder="0" scrolling="no" referrerpolicy="unsafe-url"></iframe>
 <style>margin: 0 auto;</style>
@@ -31,12 +25,11 @@ mp_face_detection = mp.solutions.face_detection
 drawing_spec = mp_drawing.DrawingSpec(thickness=1, circle_radius=1,color=(0,255,0))
 def main():
 	
-	st.components.v1.html(kakao1_ad_code, height=100, scrolling=False)
 	st.title('나의 외모점수는?')
     
     # 파일 업로드 섹션 디자인
 	st.subheader('인공지능이 당신의 매력을 분석해줄거에요!')
-	st.subheader('얼굴 정면 사진 업로드 해주세요!')
+	st.subheader('얼굴 정면 사진 업로드 해주세요! 사진은 저장되지 않습니다!' )
     # 파일 업로드 컴포넌트
 	uploaded_file = st.file_uploader("PNG 또는 JPG 이미지를 업로드하세요.", type=["png", "jpg", "jpeg"])
 	if uploaded_file is not None:
@@ -109,7 +102,7 @@ def main():
 				st.write("5점 외모, '외모의 신'입니다. 외모계에서 당신을 따라잡으려면 영웅이 필요할 겁니다! 🦸‍♂️🦸‍♀️\n당신은 외모계의 '뷰티 신'입니다! 🌟 모든 사람들이 당신을 따르고 싶어할 겁니다!")
 		except:
 			st.subheader('얼굴을 감지하지 못했습니다! 얼굴 정면 사진을 다시 입력해주세요!')
-	st.components.v1.html(kakao_ad_code, height=100, scrolling=False)
+	st.components.v1.html(kakao_ad_code, scrolling=False)
 	st.components.v1.html(coupang_ad_code, height=140, scrolling=False)
 if __name__ == "__main__":
     main()
