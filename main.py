@@ -8,8 +8,8 @@ import time
 kakao_ad_code = """
  <ins class="kakao_ad_area" style="display:none;"
 data-ad-unit = "DAN-FoAWM60Vqs0G2uuF"
-data-ad-width = "728"
-data-ad-height = "90"></ins>
+data-ad-width = "320"
+data-ad-height = "100"></ins>
 <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
 """
 
@@ -102,6 +102,7 @@ def main():
 				st.write("5점 외모, '외모의 신'입니다. 외모계에서 당신을 따라잡으려면 영웅이 필요할 겁니다! 🦸‍♂️🦸‍♀️\n당신은 외모계의 '뷰티 신'입니다! 🌟 모든 사람들이 당신을 따르고 싶어할 겁니다!")
 		except:
 			st.subheader('얼굴을 감지하지 못했습니다! 얼굴 정면 사진을 다시 입력해주세요!')
+	
 	st.components.v1.html(kakao_ad_code, scrolling=False)
 	st.components.v1.html(coupang_ad_code, height=140, scrolling=False)
 if __name__ == "__main__":
