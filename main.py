@@ -25,11 +25,11 @@ mp_face_detection = mp.solutions.face_detection
 drawing_spec = mp_drawing.DrawingSpec(thickness=1, circle_radius=1,color=(0,255,0))
 def main():
 	
-	st.title('나의 외모점수는?')
+	st.title("_나의 외모점수는_?:cupid:")
     
     # 파일 업로드 섹션 디자인
-	st.subheader('인공지능이 당신의 매력을 분석해줄거에요!')
-	st.subheader('얼굴 정면 사진 업로드 해주세요! 사진은 저장되지 않습니다!' )
+	st.subheader('인공지능이 당신의 매력을 분석해줄거에요!:sunglasses:')
+	st.write(':blue[얼굴 정면 사진을 업로드 해주세요! 사진은 저장되지 않습니다!]')
     # 파일 업로드 컴포넌트
 	uploaded_file = st.file_uploader("PNG 또는 JPG 이미지를 업로드하세요.", type=["png", "jpg", "jpeg"])
 	if uploaded_file is not None:
@@ -103,7 +103,7 @@ def main():
 		except:
 			st.subheader('얼굴을 감지하지 못했습니다! 얼굴 정면 사진을 다시 입력해주세요!')
 	
-	st.components.v1.html(f"<html><center>{kakao_ad_code}</center></html>", scrolling=False)
-	st.components.v1.html(coupang_ad_code, height=140, scrolling=False)
+	st.components.v1.html(f"<html><body><center>{kakao_ad_code}</center></body></html>", scrolling=False)
+	st.components.v1.html(coupang_ad_code, scrolling=False)
 if __name__ == "__main__":
     main()
