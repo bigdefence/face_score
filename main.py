@@ -5,13 +5,7 @@ from PIL import Image,ImageDraw
 from keras.models import load_model
 import mediapipe as mp
 import time
-st.component.v1.html(
-"""
-<head>
- <meta name="google-site-verification" content="NPCGykGd5SHrcfsH8soBEQ7PK-XiQDB5QFgJBKrS8Mc" />
-</head>
-"""
-)
+
 kakao_ad_code = """
  <ins class="kakao_ad_area" style="display:none;"
 data-ad-unit = "DAN-8eL7bm4TWXmwWKYS"
