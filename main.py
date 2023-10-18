@@ -112,5 +112,6 @@ def main():
 	
 	st.components.v1.html(f"<center>{kakao_ad_code}</center>", height=250,scrolling=False)
 	st.components.v1.html(coupang_ad_code, scrolling=False)
+	st.markdown('<a target="_blank" href="https://icons8.com/icon/7338/%EC%96%BC%EA%B5%B4-%EC%9D%B8%EC%8B%9D-%EC%8A%A4%EC%BA%94">얼굴 인식 스캔</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>', unsafe_allow_html=True)
 if __name__ == "__main__":
     main()
