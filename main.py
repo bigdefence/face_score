@@ -112,7 +112,7 @@ def main():
 			st.image(img_np,caption="업로드한 이미지",use_column_width=True)
 			with st.spinner('AI가 당신의 외모를 분석중입니다...'):
 				time.sleep(3)  # 예시로 3초 동안 로딩 중 표시 (실제 분석으로 대체 필요)
-				st.success('얼굴을 감지하지 못했습니다!   다른사진을 이용해주세요!')
+				st.error('얼굴을 감지하지 못했습니다!   다른사진을 이용해주세요!')
 	st.components.v1.html(f"<center>{kakao_ad_code}</center>", height=250,scrolling=False)
 	st.components.v1.html(coupang_ad_code, scrolling=False)
 	st.markdown('<a target="_blank" href="https://icons8.com/icon/7338/%EC%96%BC%EA%B5%B4-%EC%9D%B8%EC%8B%9D-%EC%8A%A4%EC%BA%94">얼굴 인식 스캔</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>', unsafe_allow_html=True)
