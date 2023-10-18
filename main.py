@@ -41,48 +41,49 @@ def main():
 	uploaded_file = st.file_uploader("PNG 또는 JPG 이미지를 업로드하세요.", type=["png", "jpg", "jpeg"])
 	if uploaded_file is not None:
         # 이미지를 넘파이 배열로 변환
-		image = Image.open(uploaded_file)
+		image = Image.open(uploaded_file).convert('RGB')
 		img_np=np.array(image)
 		detection_bbox=[]
 		try:
 			with mp_face_detection.FaceDetection(
-			    model_selection=1, min_detection_confidence=0.5) as face_detection:
-			    # 작업 전에 BGR 이미지를 RGB로 변환합니다.
-			    results = face_detection.process(img_np)
-			    # 이미지를 출력하고 그 위에 얼굴 박스를 그립니다.
-			    annotated_image = img_np.copy()
-			    for detection in results.detections:
-			    	bbox=detection.location_data.relative_bounding_box
-			    	detection_bbox.append(bbox)
+				model_selection=1, min_detection_confidence=0.5) as face_detection:
+				# 작업 전에 BGR 이미지를 RGB로 변환합니다.
+				results = face_detection.process(img_np)
+				# 이미지를 출력하고 그 위에 얼굴 박스를 그립니다.
+				annotated_image = img_np.copy()
+				for detection in results.detections:
+					bbox=detection.location_data.relative_bounding_box
+					detection_bbox.append(bbox)
 			with mp_face_mesh.FaceMesh(
-			        static_image_mode=True,
-			        max_num_faces=1,
-			        refine_landmarks=True,
-			        min_detection_confidence=0.5) as face_mesh:
-			    img = annotated_image
-			        # 작업 전에 BGR 이미지를 RGB로 변환합니다.
-			    results = face_mesh.process(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
-			    annotated_image = img.copy()
-			    for face_landmarks in results.multi_face_landmarks:
-			        mp_drawing.draw_landmarks(
-			            image=annotated_image,
-			            landmark_list=face_landmarks,
-			            connections=mp_face_mesh.FACEMESH_TESSELATION,
-			            landmark_drawing_spec=drawing_spec,
-			            connection_drawing_spec=mp_drawing_styles
-			            .get_default_face_mesh_tesselation_style())
-			x=int(detection_bbox[0].xmin*image.width)-35
-			y=int(detection_bbox[0].ymin*image.height)-35
+					static_image_mode=True,
+					max_num_faces=1,
+					refine_landmarks=True,
+					min_detection_confidence=0.5) as face_mesh:
+				img = annotated_image
+				# 작업 전에 BGR 이미지를 RGB로 변환합니다.
+				results = face_mesh.process(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+				annotated_image = img.copy()
+				for face_landmarks in results.multi_face_landmarks:
+					mp_drawing.draw_landmarks(
+					    image=annotated_image,
+					    landmark_list=face_landmarks,
+					    connections=mp_face_mesh.FACEMESH_TESSELATION,
+					    landmark_drawing_spec=drawing_spec,
+					    connection_drawing_spec=mp_drawing_styles
+					    .get_default_face_mesh_tesselation_style())
+			x=int(detection_bbox[0].xmin*image.width)-40
+			y=int(detection_bbox[0].ymin*image.height)-40
 			w=int(detection_bbox[0].width*image.width)+40
 			h=int(detection_bbox[0].height*image.height)+40
 			crop=img_np[y:y+h,x:x+w]
-			st.image(annotated_image, caption="업로드한 이미지", use_column_width=True)
 			img_resized=cv2.resize(crop,(350,350))
+			# annotated_image=cv2.resize(annotated_image,(0,0),fx=0.5,fy=0.5)
+			st.image(annotated_image, caption="업로드한 이미지", use_column_width=True)
 			img_resized=img_resized.astype(np.float32)/255.0
 			img_result=[img_resized]
 			img_result=np.array(img_result,dtype=np.float32)
 			preds=model.predict(img_result)
-	        # AI 외모 분석 진행
+			# AI 외모 분석 진행
 			with st.spinner('AI가 당신의 외모를 분석중입니다...'):
 				time.sleep(3)  # 예시로 3초 동안 로딩 중 표시 (실제 분석으로 대체 필요)
 				st.success('외모분석을 완료했습니다!\n나의 외모점수는? %.1f'%preds[0][0])
@@ -108,8 +109,10 @@ def main():
 			elif result==5:
 				st.write("5점 외모, '외모의 신'입니다. 외모계에서 당신을 따라잡으려면 영웅이 필요할 겁니다! 🦸‍♂️🦸‍♀️\n당신은 외모계의 '뷰티 신'입니다! 🌟 모든 사람들이 당신을 따르고 싶어할 겁니다!")
 		except:
-			st.subheader('얼굴을 감지하지 못했습니다! 얼굴 정면 사진을 다시 입력해주세요!')
-	
+			st.image(img_np,caption="업로드한 이미지",use_column_width=True)
+			with st.spinner('AI가 당신의 외모를 분석중입니다...'):
+				time.sleep(3)  # 예시로 3초 동안 로딩 중 표시 (실제 분석으로 대체 필요)
+				st.success('얼굴을 감지하지 못했습니다!   다른사진을 이용해주세요!')
 	st.components.v1.html(f"<center>{kakao_ad_code}</center>", height=250,scrolling=False)
 	st.components.v1.html(coupang_ad_code, scrolling=False)
 	st.markdown('<a target="_blank" href="https://icons8.com/icon/7338/%EC%96%BC%EA%B5%B4-%EC%9D%B8%EC%8B%9D-%EC%8A%A4%EC%BA%94">얼굴 인식 스캔</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>', unsafe_allow_html=True)
