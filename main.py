@@ -73,8 +73,8 @@ def main():
 					    .get_default_face_mesh_tesselation_style())
 			x=int(detection_bbox[0].xmin*image.width)-40
 			y=int(detection_bbox[0].ymin*image.height)-40
-			w=int(detection_bbox[0].width*image.width)+40
-			h=int(detection_bbox[0].height*image.height)+40
+			w=int(detection_bbox[0].width*image.width)+45
+			h=int(detection_bbox[0].height*image.height)+45
 			crop=img_np[y:y+h,x:x+w]
 			img_resized=cv2.resize(crop,(350,350))
 			# annotated_image=cv2.resize(annotated_image,(0,0),fx=0.5,fy=0.5)
