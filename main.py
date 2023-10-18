@@ -5,6 +5,7 @@ from PIL import Image,ImageDraw
 from keras.models import load_model
 import mediapipe as mp
 import time
+st.set_page_config(page_title="나의 외모점수는?")
 kakao_ad_code = """
  <ins class="kakao_ad_area" style="display:none;"
 data-ad-unit = "DAN-8eL7bm4TWXmwWKYS"
