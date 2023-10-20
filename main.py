@@ -12,14 +12,20 @@ st.set_page_config(
         'About': "What's your score on your appearance?\n나의 외모점수는?\nThis is an cool app!"
     }
 )
-kakao_ad_code = """
+kakao_ad_code1 = """
  <ins class="kakao_ad_area" style="display:none;"
 data-ad-unit = "DAN-sSbpQDd6RXKtBOHw"
 data-ad-width = "250"
 data-ad-height = "250"></ins>
 <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
 """
-
+kakao_ad_code2 = """
+ <ins class="kakao_ad_area" style="display:none;"
+data-ad-unit = "DAN-SdcWhppbpnLmiYIX"
+data-ad-width = "250"
+data-ad-height = "250"></ins>
+<script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
+"""
 coupang_ad_code="""
 <iframe src="https://ads-partners.coupang.com/widgets.html?id=718831&template=carousel&trackingCode=AF3660738&subId=&width=680&height=140&tsource=" width="680" height="140" frameborder="0" scrolling="no" referrerpolicy="unsafe-url"></iframe>
 <style>margin: 0 auto;</style>
@@ -113,7 +119,11 @@ def main():
 			with st.spinner('AI가 당신의 외모를 분석중입니다...'):
 				time.sleep(3)  # 예시로 3초 동안 로딩 중 표시 (실제 분석으로 대체 필요)
 				st.error('얼굴을 감지하지 못했습니다!   다른사진을 이용해주세요!')
-	st.components.v1.html(f"<center>{kakao_ad_code}</center>", height=250,scrolling=False)
+	col1, col2 = st.columns(2)
+	with col1:
+		st.components.v1.html(f"<center>{kakao_ad_code1}</center>", height=250, scrolling=False)
+	with col2:
+		st.components.v1.html(f"<center>{kakao_ad_code2}</center>", height=250, scrolling=False)
 	st.components.v1.html(coupang_ad_code, scrolling=False)
 	st.markdown('<a target="_blank" href="https://icons8.com/icon/7338/%EC%96%BC%EA%B5%B4-%EC%9D%B8%EC%8B%9D-%EC%8A%A4%EC%BA%94">얼굴 인식 스캔</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>', unsafe_allow_html=True)
 if __name__ == "__main__":
