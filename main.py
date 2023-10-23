@@ -89,6 +89,7 @@ def main():
 			img_result=[img_resized]
 			img_result=np.array(img_result,dtype=np.float32)
 			preds=model.predict(img_result)
+			preds[0][0]+=0.3
 			# AI 외모 분석 진행
 			with st.spinner('AI가 당신의 외모를 분석중입니다...'):
 				time.sleep(3)  # 예시로 3초 동안 로딩 중 표시 (실제 분석으로 대체 필요)
