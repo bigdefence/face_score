@@ -48,6 +48,7 @@ def main():
 	if uploaded_file is not None:
         # 이미지를 넘파이 배열로 변환
 		image = Image.open(uploaded_file).convert('RGB')
+		image = ImageOps.exif_transpose(image)
 		img_np=np.array(image)
 		detection_bbox=[]
 		try:
