@@ -1,7 +1,7 @@
 import streamlit as st
 import cv2
 import numpy as np
-from PIL import Image,ImageDraw
+from PIL import Image,ImageDraw,ImageOps
 from keras.models import load_model
 import mediapipe as mp
 import time
