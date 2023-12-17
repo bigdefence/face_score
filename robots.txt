@@ -1,2 +1,4 @@
 User-agent: *
 Allow: /
+
+Sitemap: https://bigdefence.github.io/face_score/sitemap.xml
