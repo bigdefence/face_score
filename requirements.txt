@@ -1,6 +1,6 @@
 opencv-python-headless
-Keras
-tensorflow
+torch
+timm
 numpy
 pillow
 mediapipe
