@@ -3,6 +3,7 @@ import cv2
 import numpy as np
 from PIL import Image, ImageDraw, ImageOps
 from keras.models import load_model
+from keras.optimizers import Adam
 import mediapipe as mp
 import time
 
@@ -14,7 +15,12 @@ st.set_page_config(
     }
 )
 
-model = load_model('face.h5')
+# Define custom objects to handle the deserialization error
+def custom_adam_optimizer():
+    return Adam(learning_rate=0.001)
+
+# Load the model with the custom objects
+model = load_model('face.h5', custom_objects={'Adam': custom_adam_optimizer})
 mp_drawing = mp.solutions.drawing_utils
 mp_face_mesh = mp.solutions.face_mesh
 mp_drawing_styles = mp.solutions.drawing_styles
@@ -43,9 +49,12 @@ def main():
                 results = face_detection.process(img_np)
                 # 이미지를 출력하고 그 위에 얼굴 박스를 그립니다.
                 annotated_image = img_np.copy()
-                for detection in results.detections:
-                    bbox = detection.location_data.relative_bounding_box
-                    detection_bbox.append(bbox)
+                if results.detections:
+                    for detection in results.detections:
+                        bbox = detection.location_data.relative_bounding_box
+                        detection_bbox.append(bbox)
+                else:
+                    raise ValueError("No face detected")
             with mp_face_mesh.FaceMesh(
                     static_image_mode=True,
                     max_num_faces=1,
@@ -55,21 +64,23 @@ def main():
                 # 작업 전에 BGR 이미지를 RGB로 변환합니다.
                 results = face_mesh.process(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
                 annotated_image = img.copy()
-                for face_landmarks in results.multi_face_landmarks:
-                    mp_drawing.draw_landmarks(
-                        image=annotated_image,
-                        landmark_list=face_landmarks,
-                        connections=mp_face_mesh.FACEMESH_TESSELATION,
-                        landmark_drawing_spec=drawing_spec,
-                        connection_drawing_spec=mp_drawing_styles
-                        .get_default_face_mesh_tesselation_style())
+                if results.multi_face_landmarks:
+                    for face_landmarks in results.multi_face_landmarks:
+                        mp_drawing.draw_landmarks(
+                            image=annotated_image,
+                            landmark_list=face_landmarks,
+                            connections=mp_face_mesh.FACEMESH_TESSELATION,
+                            landmark_drawing_spec=drawing_spec,
+                            connection_drawing_spec=mp_drawing_styles
+                            .get_default_face_mesh_tesselation_style())
+                else:
+                    raise ValueError("No face landmarks detected")
             x = int(detection_bbox[0].xmin * image.width) - 40
             y = int(detection_bbox[0].ymin * image.height) - 40
             w = int(detection_bbox[0].width * image.width) + 45
             h = int(detection_bbox[0].height * image.height) + 45
             crop = img_np[y:y+h, x:x+w]
             img_resized = cv2.resize(crop, (350, 350))
-            # annotated_image = cv2.resize(annotated_image, (0, 0), fx=0.5, fy=0.5)
             st.image(annotated_image, caption="업로드한 이미지", use_column_width=True)
             img_resized = img_resized.astype(np.float32) / 255.0
             img_result = [img_resized]
@@ -101,11 +112,11 @@ def main():
                 st.info("'외모의 황금빛'입니다. 💛 주변에서 당신을 보면 하트가 뿅뿅 튈 겁니다! 💓\n외모 %.1f점, 이게 바로 '외모의 레전드'입니다! 🌠 당신을 따라오려면 다른 사람들이 노력해야 할 겁니다!" % preds[0][0])
             elif result == 5:
                 st.info("5점 외모, '외모의 신'입니다. 외모계에서 당신을 따라잡으려면 영웅이 필요할 겁니다! 🦸‍♂️🦸‍♀️\n당신은 외모계의 '뷰티 신'입니다! 🌟 모든 사람들이 당신을 따르고 싶어할 겁니다!")
-        except:
+        except Exception as e:
             st.image(img_np, caption="업로드한 이미지", use_column_width=True)
             with st.spinner('AI가 당신의 외모를 분석중입니다...'):
                 time.sleep(3)  # 예시로 3초 동안 로딩 중 표시 (실제 분석으로 대체 필요)
-                st.error('얼굴을 감지하지 못했습니다! 다른 사진을 이용해주세요!')
+                st.error(f'얼굴을 감지하지 못했습니다! 다른 사진을 이용해주세요! 오류: {e}')
     
     st.markdown('<a target="_blank" href="https://icons8.com/icon/7338/%EC%96%BC%EA%B5%B4-%EC%9D%B8%EC%8B%9D-%EC%8A%A4%EC%BA%94">얼굴 인식 스캔</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>', unsafe_allow_html=True)
 
