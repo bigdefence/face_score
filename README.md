@@ -18,8 +18,8 @@
 
 1. 이 저장소를 클론합니다:
    ```
-   git clone https://github.com/yourusername/appearance-score-app.git
-   cd appearance-score-app
+   git clone https://github.com/bigdefence/face_score.git
+   cd face_score
    ```
 
 2. 필요한 패키지를 설치합니다:
@@ -77,7 +77,7 @@ streamlit run app.py
 
 ## 👨‍💻 개발자
 
-이 프로젝트는 [당신의 이름]에 의해 개발되었습니다.
+이 프로젝트는 [정강빈]에 의해 개발되었습니다.
 
 ## 📄 라이선스
 
