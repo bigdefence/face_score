@@ -39,7 +39,7 @@
 
 다음 명령어로 Streamlit 앱을 실행합니다:
 ```
-streamlit run app.py
+streamlit run main.py
 ```
 
 ## 📊 사용 방법
