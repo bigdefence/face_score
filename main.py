@@ -7,18 +7,74 @@ import mediapipe as mp
 import time
 import albumentations as A
 from albumentations.pytorch.transforms import ToTensorV2
-
+import base64
 # Streamlit 페이지 설정
 st.set_page_config(
     page_title="나의 외모점수는?",
     page_icon=":star:",
-    layout="wide",
+    # layout="wide",
     initial_sidebar_state="expanded",
     menu_items={
         'About': "## What's your score on your appearance?\n나의 외모점수는?\nThis is a cool app!"
     }
 )
+def get_base64_of_bin_file(bin_file):
+    with open(bin_file, 'rb') as f:
+        data = f.read()
+    return base64.b64encode(data).decode()
 
+bg_image_base64 = get_base64_of_bin_file('background.jpg')
+st.markdown("""
+<style>
+    .reportview-container {
+        background: linear-gradient(to right, #4e54c8, #8f94fb);
+        color: white;
+    }
+    .sidebar .sidebar-content {
+        background: linear-gradient(to bottom, #4e54c8, #8f94fb);
+        color: white;
+    }
+    h1 {
+        color: white;
+        text-align: center;
+        font-size: 3em;
+    }
+    .stButton>button {
+        color: #4e54c8;
+        background-color: #f9d71c;
+        border: 2px solid #4e54c8;
+    }
+    .stTextInput>div>div>input {
+        color: #4e54c8;
+    }
+</style>
+""", unsafe_allow_html=True)
+
+page_bg_img = f"""
+<style>
+[data-testid="stAppViewContainer"] > .main {{
+background-image: url("data:image/jpg;base64,{bg_image_base64}");
+background-size: cover;
+background-position: center center;
+background-repeat: no-repeat;
+background-attachment: fixed;
+}}
+
+[data-testid="stHeader"] {{
+background: rgba(0,0,0,0);
+}}
+
+[data-testid="stSidebar"] {{
+background: rgba(0,0,0,0);
+}}
+
+[data-testid="stFooter"] {{
+background: rgba(0,0,0,0);
+}}
+</style>
+"""
+
+st.markdown(page_bg_img, unsafe_allow_html=True)
 # 모델 로딩
 @st.cache_resource
 def load_model():
@@ -124,11 +180,12 @@ def main():
             }
         </style>
     """, unsafe_allow_html=True)
-    
+    st.sidebar.image("logo.png", use_column_width=True)
     st.title("_나의 외모점수는_? :cupid:")
-    st.subheader('인공지능이 당신의 매력을 분석해줄거에요! :sunglasses:')
-    st.write(':blue[얼굴 정면 사진을 업로드 해주세요! 사진은 저장되지 않습니다!]')
-    
+    st.write("<span style='font-size:30px;color:white'>인공지능이 당신의 매력을 분석해줄거에요! :sunglasses:</span>",unsafe_allow_html=True)
+    st.write("<span style='font-size:20px;color:black'>얼굴 정면 사진을 업로드 해주세요! 사진은 저장되지 않습니다!</span>",unsafe_allow_html=True)
+    st.sidebar.header("About 나의 외모점수는?")
+    st.sidebar.info("앱은 인공지능(AI) 기술을 활용하여 사용자들의 얼굴 사진을 분석하고 외모 점수를 제공하는 흥미로운 도구입니다. 사용자는 얼굴 정면 사진을 업로드하기만 하면, AI가 얼굴의 다양한 특징을 분석하여 점수를 예측합니다. 이를 통해, 사용자는 자신의 매력을 색다르게 확인할 수 있습니다. 이 앱은 재미와 흥미를 더하기 위해 개발되었으며, 결과는 단지 참고용일 뿐 개인의 아름다움이나 가치를 판단하는 기준이 될 수는 없습니다. AI가 제공하는 외모 점수와 함께 자기 자신을 긍정적으로 바라보는 기회를 가져보세요!")
     uploaded_file = st.file_uploader("PNG 또는 JPG 이미지를 업로드하세요.", type=["png", "jpg", "jpeg"])
     
     if uploaded_file is not None:
